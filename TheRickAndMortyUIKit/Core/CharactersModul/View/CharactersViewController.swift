@@ -7,10 +7,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class CharactersViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadLayout()
+    }
+}
+
+//MARK: - layout
+private extension CharactersViewController {
+    func loadLayout() {
         view.backgroundColor = .red
     }
 }

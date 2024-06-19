@@ -17,9 +17,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
-        let mainViewController = ViewController()
-        let navViewController = UINavigationController(rootViewController: mainViewController)
-        window?.rootViewController = navViewController
+        let tabBar = UITabBarController()
+        
+        let charactersViewController = UINavigationController(rootViewController: CharactersViewController())
+        let locationsViewController = UINavigationController(rootViewController: LocationsViewController())
+        let episodesViewController = UINavigationController(rootViewController: EpisodesViewController())
+        
+        charactersViewController.tabBarItem = UITabBarItem(title: "Charackter", image: UIImage(systemName: "person"), tag: 0)
+        locationsViewController.tabBarItem = UITabBarItem(title: "Locations", image: UIImage(systemName: "globe"), tag: 1)
+        episodesViewController.tabBarItem = UITabBarItem(title: "Episodes", image: UIImage(systemName: "tv"), tag: 2)
+        
+        let viewControllers = [charactersViewController, episodesViewController, locationsViewController]
+        
+        tabBar.viewControllers = viewControllers
+        
+        window?.rootViewController = tabBar
         window?.makeKeyAndVisible()
     }
 
