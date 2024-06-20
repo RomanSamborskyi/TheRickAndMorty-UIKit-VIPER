@@ -27,7 +27,7 @@ class CharactersPresenter {
 //MARK: - protocol conforrmation
 extension CharactersPresenter: CharactersPresnterProtocol {
     func charactersDidLoad(character: [Character]) {
-        
+        view?.showCharacters(characters: character)
     }
     func viewContorllerDidLoad() {
         interactor?.fetchCharacters()

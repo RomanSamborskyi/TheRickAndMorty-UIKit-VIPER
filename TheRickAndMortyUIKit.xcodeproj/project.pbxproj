@@ -117,12 +117,12 @@
 		6BD6D00E2C23458000DAADD0 /* CharactersModul */ = {
 			isa = PBXGroup;
 			children = (
+				6BD6D0282C249A9C00DAADD0 /* CharactersModulBuilder.swift */,
 				6BD6D0142C23464D00DAADD0 /* Entity */,
 				6BD6D0122C2345E600DAADD0 /* Interactor */,
 				6BD6D0132C23464400DAADD0 /* Presenter */,
 				6BD6D0152C23465900DAADD0 /* Router */,
 				6BD6D0112C2345DE00DAADD0 /* View */,
-				6BD6D0282C249A9C00DAADD0 /* CharactersModulBuilder.swift */,
 			);
 			path = CharactersModul;
 			sourceTree = "<group>";

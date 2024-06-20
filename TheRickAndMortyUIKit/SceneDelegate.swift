@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBar = UITabBarController()
         
-        let charactersViewController = UINavigationController(rootViewController: CharactersViewController())
+        let charactersViewController = UINavigationController(rootViewController: CharactersModulBuilder.build())
         let locationsViewController = UINavigationController(rootViewController: LocationsViewController())
         let episodesViewController = UINavigationController(rootViewController: EpisodesViewController())
         

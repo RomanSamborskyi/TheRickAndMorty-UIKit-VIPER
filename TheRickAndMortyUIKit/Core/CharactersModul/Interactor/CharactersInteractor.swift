@@ -23,7 +23,7 @@ class CharactersInteractor {
 //MARK: - prototcol conformation
 extension CharactersInteractor: CharactersInteractorPrortocol {
     func fetchCharacters() {
-        apiManager.loadData(with: "", for: CharacterResponse.self, complition: { [weak self] response in
+        apiManager.loadData(with: "https://rickandmortyapi.com/api/character", for: CharacterResponse.self, complition: { [weak self] response in
             self?.presenter?.charactersDidLoad(character: response.results)
         })
     }
