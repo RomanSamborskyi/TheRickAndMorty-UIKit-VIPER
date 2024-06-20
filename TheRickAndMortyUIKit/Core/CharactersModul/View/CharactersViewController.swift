@@ -7,10 +7,18 @@
 
 import UIKit
 
+protocol CharactersViewProtocol: AnyObject {
+    
+}
+
 class CharactersViewController: UIViewController {
+    
+    var presenter: CharactersPresnterProtocol? 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewContorllerDidLoad()
+        view.backgroundColor = .systemBackground
         loadLayout()
     }
 }
@@ -18,7 +26,10 @@ class CharactersViewController: UIViewController {
 //MARK: - layout
 private extension CharactersViewController {
     func loadLayout() {
-        view.backgroundColor = .red
+        
     }
 }
-
+//MARK: - protocol conformation
+extension CharactersViewController: CharactersViewProtocol {
+    
+}

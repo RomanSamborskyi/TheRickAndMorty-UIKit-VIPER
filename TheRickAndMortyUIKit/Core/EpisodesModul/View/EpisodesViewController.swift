@@ -8,22 +8,32 @@
 import UIKit
 
 class EpisodesViewController: UIViewController {
+    
+    lazy private var label: UILabel = {
+       let label  = UILabel()
+        label.text = "Episodes"
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .purple
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .systemBackground
+        setupLayout()
     }
-    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+//MARK: - layout
+private extension EpisodesViewController {
+    func setupLayout() {
+        setupLabel()
     }
-    */
-
+    func setupLabel() {
+        view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
 }
