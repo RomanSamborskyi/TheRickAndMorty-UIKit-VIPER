@@ -20,8 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBar = UITabBarController()
         
         let charactersViewController = UINavigationController(rootViewController: CharactersModulBuilder.build())
-        let locationsViewController = UINavigationController(rootViewController: LocationsViewController())
-        let episodesViewController = UINavigationController(rootViewController: EpisodesViewController())
+        let locationsViewController = UINavigationController(rootViewController: LocationsModulBuilder.build())
+        let episodesViewController = UINavigationController(rootViewController: EpisodesModulBuilder.build())
         
         charactersViewController.tabBarItem = UITabBarItem(title: "Charackter", image: UIImage(systemName: "person"), tag: 0)
         locationsViewController.tabBarItem = UITabBarItem(title: "Locations", image: UIImage(systemName: "globe"), tag: 1)

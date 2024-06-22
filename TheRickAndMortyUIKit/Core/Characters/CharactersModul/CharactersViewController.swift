@@ -21,7 +21,7 @@ class CharactersViewController: UIViewController {
     lazy private var charactersCell: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 180, height: 290)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 2.2, height: UIScreen.main.bounds.height / 2.9)
         let cell = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cell.translatesAutoresizingMaskIntoConstraints = false
         cell.register(CharacterViewCell.self, forCellWithReuseIdentifier: CharacterViewCell.identifier)
@@ -57,7 +57,7 @@ private extension CharactersViewController {
             charactersCell.topAnchor.constraint(equalTo: view.topAnchor),
             charactersCell.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             charactersCell.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            charactersCell.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80),
+            charactersCell.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: UIScreen.main.bounds.height * 0.0004),
         ])
     }
 }

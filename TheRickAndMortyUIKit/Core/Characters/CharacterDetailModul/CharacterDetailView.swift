@@ -69,7 +69,6 @@ private extension CharacterDetailView {
         self.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
-       // imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 15
         
         NSLayoutConstraint.activate([

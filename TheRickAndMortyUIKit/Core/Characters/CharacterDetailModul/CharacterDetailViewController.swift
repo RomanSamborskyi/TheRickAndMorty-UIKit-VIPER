@@ -14,7 +14,11 @@ protocol CharacterDetailViewProtocol: AnyObject {
 class CharacterDetailViewController: UIViewController {
     
     var presenter: CharacterDetailPresenterProtocol?
-    lazy var details = CharacterDetailView()
+    lazy private var details = CharacterDetailView()
+    lazy private var scrlView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +38,10 @@ extension CharacterDetailViewController: CharacterDetailViewProtocol {
 }
 private extension CharacterDetailViewController {
     func setupLayout() {
+        setupScrollView()
+        setupDetailView()
+    }
+    func setupDetailView() {
         view.addSubview(details)
         details.translatesAutoresizingMaskIntoConstraints = false
         
@@ -42,6 +50,18 @@ private extension CharacterDetailViewController {
             details.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             details.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             details.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+        ])
+    }
+    func setupScrollView() {
+        view.addSubview(scrlView)
+        scrlView.addSubview(details)
+        scrlView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            scrlView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrlView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrlView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrlView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
 }

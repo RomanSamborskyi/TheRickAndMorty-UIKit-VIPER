@@ -1,5 +1,5 @@
 //
-//  LocationsViewController.swift
+//  EpisodesViewController.swift
 //  TheRickAndMortyUIKit
 //
 //  Created by Roman Samborskyi on 19.06.2024.
@@ -7,24 +7,30 @@
 
 import UIKit
 
-class LocationsViewController: UIViewController {
+protocol EpisodesViewProtocol: AnyObject {
+    
+}
+
+class EpisodesViewController: UIViewController {
+    
+    var presenter: EpisodesPresenterProtocol?
     
     lazy private var label: UILabel = {
        let label  = UILabel()
-        label.text = "Locations"
+        label.text = "Episodes"
         return label
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        presenter?.viewControllerDidLoad()
         setupLayout()
-       
     }
 }
 
 //MARK: - layout
-private extension LocationsViewController {
+private extension EpisodesViewController {
     func setupLayout() {
         setupLabel()
     }
@@ -37,4 +43,7 @@ private extension LocationsViewController {
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
+}
+extension EpisodesViewController: EpisodesViewProtocol {
+    
 }
