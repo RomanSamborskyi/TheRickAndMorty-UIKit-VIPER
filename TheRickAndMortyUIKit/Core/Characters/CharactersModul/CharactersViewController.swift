@@ -42,9 +42,7 @@ class CharactersViewController: UIViewController {
 //MARK: - layout
 private extension CharactersViewController {
     func loadLayout() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.setupCollectionViewCell()
-        }
+        self.setupCollectionViewCell()
     }
     func setupCollectionViewCell() {
         view.addSubview(charactersCell)
@@ -82,7 +80,7 @@ extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = charactersCell.dequeueReusableCell(withReuseIdentifier: CharacterViewCell.identifier, for: indexPath) as! CharacterViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterViewCell.identifier, for: indexPath) as! CharacterViewCell
             cell.character = self.characters[indexPath.row]
             let char = self.characters[indexPath.row]
             cell.poster = posters[char.id]

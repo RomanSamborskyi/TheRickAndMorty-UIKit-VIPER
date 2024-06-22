@@ -17,8 +17,8 @@ protocol CharactersPresnterProtocol: AnyObject {
 class CharactersPresenter {
     
     weak var mainView: CharactersViewProtocol?
-    var router: CharactersRouterProtocol?
-    var interactor: CharactersInteractorPrortocol?
+    var router: CharactersRouterProtocol
+    var interactor: CharactersInteractorPrortocol
     
     init(interactor: CharactersInteractorPrortocol, router: CharactersRouterProtocol) {
         self.interactor = interactor
@@ -30,7 +30,7 @@ class CharactersPresenter {
 //MARK: - protocol conforrmation
 extension CharactersPresenter: CharactersPresnterProtocol {
     func didDetailButtonTapped(for character: Character, image: UIImage) {
-        router?.openDEtails(for: character, image: image)
+        router.openDEtails(for: character, image: image)
     }
     func imageDidLoaded(images: [Int: UIImage]) {
         mainView?.showCharacterImage(image: images)
@@ -39,6 +39,6 @@ extension CharactersPresenter: CharactersPresnterProtocol {
         mainView?.showCharacters(characters: character)
     }
     func viewContorllerDidLoad() {
-        interactor?.fetchCharacters()
+        interactor.fetchCharacters()
     }
 }

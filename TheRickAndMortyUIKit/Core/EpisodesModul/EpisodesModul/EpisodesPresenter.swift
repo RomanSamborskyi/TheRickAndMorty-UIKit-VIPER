@@ -10,6 +10,7 @@ import UIKit
 
 protocol EpisodesPresenterProtocol: AnyObject {
     func viewControllerDidLoad()
+    func episodesDidDowloaded(episodes: [Episode])
 }
 
 class EpisodesPresenter {
@@ -26,7 +27,10 @@ class EpisodesPresenter {
 }
 //MARK: - protocol conformation
 extension EpisodesPresenter: EpisodesPresenterProtocol {
+    func episodesDidDowloaded(episodes: [Episode]) {
+        view?.show(episodes: episodes)
+    }
     func viewControllerDidLoad() {
-        
+        interactor.fetchEpisodes()
     }
 }
