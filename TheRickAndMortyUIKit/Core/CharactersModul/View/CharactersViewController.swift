@@ -21,7 +21,7 @@ class CharactersViewController: UIViewController {
     lazy private var charactersCell: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 180, height: 270)
+        layout.itemSize = CGSize(width: 180, height: 290)
         let cell = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cell.translatesAutoresizingMaskIntoConstraints = false
         cell.register(CharacterViewCell.self, forCellWithReuseIdentifier: CharacterViewCell.identifier)
@@ -48,12 +48,13 @@ private extension CharactersViewController {
         charactersCell.delegate = self
         charactersCell.dataSource = self
         charactersCell.backgroundColor = .systemBackground
+        charactersCell.tag = 0
         
         NSLayoutConstraint.activate([
             charactersCell.topAnchor.constraint(equalTo: view.topAnchor),
             charactersCell.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             charactersCell.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            charactersCell.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
+            charactersCell.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80),
         ])
     }
 }
@@ -62,13 +63,13 @@ extension CharactersViewController: CharactersViewProtocol {
     func showCharacterImage(image: [Int : UIImage]) {
         DispatchQueue.main.async {
             self.posters = image
-            self.view.layoutIfNeeded()
+            self.charactersCell.reloadData()
         }
     }
     func showCharacters(characters: [Character]) {
         DispatchQueue.main.async {
             self.characters = characters
-            self.view.layoutIfNeeded()
+            self.charactersCell.reloadData()
         }
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 protocol CharactersPresnterProtocol: AnyObject {
     func viewContorllerDidLoad()
     func charactersDidLoad(character: [Character])
-    func imageDidLoaded(image: [Int: UIImage])
+    func imageDidLoaded(images: [Int: UIImage])
 }
 
 class CharactersPresenter {
@@ -28,14 +28,13 @@ class CharactersPresenter {
 
 //MARK: - protocol conforrmation
 extension CharactersPresenter: CharactersPresnterProtocol {
-    func imageDidLoaded(image: [Int: UIImage]) {
-        view?.showCharacterImage(image: image)
+    func imageDidLoaded(images: [Int: UIImage]) {
+        view?.showCharacterImage(image: images)
     }
     func charactersDidLoad(character: [Character]) {
         view?.showCharacters(characters: character)
     }
     func viewContorllerDidLoad() {
         interactor?.fetchCharacters()
-        interactor?.fetchImage()
     }
 }
