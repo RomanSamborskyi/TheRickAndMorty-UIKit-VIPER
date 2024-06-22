@@ -9,13 +9,14 @@ import UIKit
 
 protocol CharactersPresnterProtocol: AnyObject {
     func viewContorllerDidLoad()
+    func didDetailButtonTapped(for character: Character, image: UIImage)
     func charactersDidLoad(character: [Character])
     func imageDidLoaded(images: [Int: UIImage])
 }
 
 class CharactersPresenter {
     
-    weak var view: CharactersViewProtocol?
+    weak var mainView: CharactersViewProtocol?
     var router: CharactersRouterProtocol?
     var interactor: CharactersInteractorPrortocol?
     
@@ -28,11 +29,14 @@ class CharactersPresenter {
 
 //MARK: - protocol conforrmation
 extension CharactersPresenter: CharactersPresnterProtocol {
+    func didDetailButtonTapped(for character: Character, image: UIImage) {
+        router?.openDEtails(for: character, image: image)
+    }
     func imageDidLoaded(images: [Int: UIImage]) {
-        view?.showCharacterImage(image: images)
+        mainView?.showCharacterImage(image: images)
     }
     func charactersDidLoad(character: [Character]) {
-        view?.showCharacters(characters: character)
+        mainView?.showCharacters(characters: character)
     }
     func viewContorllerDidLoad() {
         interactor?.fetchCharacters()

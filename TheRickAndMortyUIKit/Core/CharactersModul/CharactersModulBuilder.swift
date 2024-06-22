@@ -14,10 +14,11 @@ class CharactersModulBuilder {
         let router = CharactersRouter()
         let presenter = CharactersPresenter(interactor: interactor, router: router)
         let characterViewController = CharactersViewController()
+        
         characterViewController.presenter = presenter
-        presenter.view = characterViewController
+        presenter.mainView = characterViewController
         interactor.presenter = presenter
-        router.presenter = presenter
+        router.view = characterViewController
         return characterViewController
     }
 }

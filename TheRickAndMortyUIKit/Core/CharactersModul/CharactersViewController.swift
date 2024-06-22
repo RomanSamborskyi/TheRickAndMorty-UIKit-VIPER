@@ -27,9 +27,12 @@ class CharactersViewController: UIViewController {
         cell.register(CharacterViewCell.self, forCellWithReuseIdentifier: CharacterViewCell.identifier)
         return cell
     }()
-    
+    //MARK: - init
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Characters"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.largeTitleDisplayMode = .always
         view.backgroundColor = .systemBackground
         presenter?.viewContorllerDidLoad()
         loadLayout()
@@ -84,5 +87,10 @@ extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDa
             let char = self.characters[indexPath.row]
             cell.poster = posters[char.id]
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let character = self.characters[indexPath.row]
+        guard let poster = posters[character.id] else { return }
+        presenter?.didDetailButtonTapped(for: character, image: poster)
     }
 }

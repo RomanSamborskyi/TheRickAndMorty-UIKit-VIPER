@@ -18,7 +18,6 @@ class CharactersInteractor {
     weak var presenter: CharactersPresnterProtocol?
     let apiManager = APIManager()
     let imageDownloader = ImageDownloader()
-    
 }
 
 //MARK: - prototcol conformation
