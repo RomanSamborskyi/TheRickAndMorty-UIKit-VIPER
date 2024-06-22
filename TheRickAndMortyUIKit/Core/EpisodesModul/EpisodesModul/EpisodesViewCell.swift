@@ -41,6 +41,8 @@ class EpisodesViewCell: UICollectionViewCell {
         return label
     }()
     
+    let separatorView = UIView.init(frame: CGRect(x: 5, y: UIScreen.main.bounds.height - 1, width: UIScreen.main.bounds.width - 5, height: 1))
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.layer.borderWidth = 3
@@ -58,8 +60,21 @@ private extension EpisodesViewCell {
     func setupLayout() {
         setupNameLabel()
         setupEpisodeNameLabel()
+        setupSeparator()
         setupEpLabel()
         setupEpisodesLabel()
+    }
+    func setupSeparator() {
+        self.contentView.addSubview(separatorView)
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        separatorView.backgroundColor = .lightGray
+        
+        NSLayoutConstraint.activate([
+            separatorView.topAnchor.constraint(equalTo: nameEpisodeLabel.bottomAnchor, constant: 5),
+            separatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25),
+            separatorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25),
+            separatorView.heightAnchor.constraint(equalToConstant: 1)
+        ])
     }
     func setupNameLabel() {
         self.contentView.addSubview(nameLabel)
@@ -71,7 +86,6 @@ private extension EpisodesViewCell {
             nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25),
             nameLabel.widthAnchor.constraint(equalToConstant: 55),
-           // nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
         
     }
@@ -94,20 +108,19 @@ private extension EpisodesViewCell {
         epLabel.textColor = .lightGray
         
         NSLayoutConstraint.activate([
-            epLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
+            epLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor),
             epLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25),
             epLabel.widthAnchor.constraint(equalToConstant: 55),
-            epLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 20),
+            epLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
         ])
       
     }
     func setupEpisodesLabel() {
         self.contentView.addSubview(episodesLabel)
         episodesLabel.translatesAutoresizingMaskIntoConstraints = false
-        episodesLabel.font = .systemFont(ofSize: 18)
+        episodesLabel.font = .systemFont(ofSize: 15)
         
         NSLayoutConstraint.activate([
-           // episodesLabel.topAnchor.constraint(equalTo: nameEpisodeLabel.topAnchor, constant: 5),
             episodesLabel.leadingAnchor.constraint(equalTo: epLabel.trailingAnchor, constant: 10),
             episodesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             episodesLabel.centerYAnchor.constraint(equalTo: epLabel.centerYAnchor)
