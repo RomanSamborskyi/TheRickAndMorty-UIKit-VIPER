@@ -9,12 +9,14 @@ import UIKit
 
 protocol CharactersViewProtocol: AnyObject {
     func showCharacters(characters: [Character])
+    func showCharacterImage(image: [Int: UIImage])
 }
 
 class CharactersViewController: UIViewController {
     
     var presenter: CharactersPresnterProtocol? 
     private(set) var characters: [Character] = []
+    private(set) var posters: [Int: UIImage] = [:]
     
     lazy private var charactersCell: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -57,6 +59,12 @@ private extension CharactersViewController {
 }
 //MARK: - protocol conformation
 extension CharactersViewController: CharactersViewProtocol {
+    func showCharacterImage(image: [Int : UIImage]) {
+        DispatchQueue.main.async {
+            self.posters = image
+            self.view.layoutIfNeeded()
+        }
+    }
     func showCharacters(characters: [Character]) {
         DispatchQueue.main.async {
             self.characters = characters
@@ -72,6 +80,8 @@ extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = charactersCell.dequeueReusableCell(withReuseIdentifier: CharacterViewCell.identifier, for: indexPath) as! CharacterViewCell
             cell.character = self.characters[indexPath.row]
+            let char = self.characters[indexPath.row]
+            cell.poster = posters[char.id]
         return cell
     }
 }

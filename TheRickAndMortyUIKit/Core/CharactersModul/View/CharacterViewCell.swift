@@ -18,9 +18,15 @@ class CharacterViewCell: UICollectionViewCell {
         }
     }
     
+    var poster: UIImage? {
+        didSet {
+            guard let image = poster  else { return }
+            imageView.image = image
+        }
+    }
+    
     lazy private var imageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(systemName: "photo.stack")
         return iv
     }()
     
@@ -57,6 +63,9 @@ private extension CharacterViewCell {
     func setupImageView() {
         contentView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 15
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
