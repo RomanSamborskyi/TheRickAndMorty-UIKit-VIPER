@@ -12,7 +12,7 @@ import UIKit
 protocol EpisodeDetailPresenterProtocol: AnyObject {
     func viewControllerDidLoad()
     func epsisoeDidShowed(episode: Episode)
-    func charactersDidShowed(characters: [Character])
+    func charactersDidShowed(characters: [Character], images: [Int : UIImage])
 }
 
 class EpisodeDetailPresenter {
@@ -29,8 +29,9 @@ class EpisodeDetailPresenter {
 }
 //MARK: - protocol conformation
 extension EpisodeDetailPresenter: EpisodeDetailPresenterProtocol {
-    func charactersDidShowed(characters: [Character]) {
-        view?.show(characters: characters)
+
+    func charactersDidShowed(characters: [Character], images: [Int : UIImage]) {
+        view?.show(characters: characters, images: images)
     }
     
     func epsisoeDidShowed(episode: Episode) {

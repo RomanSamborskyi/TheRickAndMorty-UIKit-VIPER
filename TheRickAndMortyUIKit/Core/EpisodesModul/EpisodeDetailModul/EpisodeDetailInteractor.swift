@@ -18,6 +18,7 @@ class EpisodeDetailInteractor {
     weak var presenter: EpisodeDetailPresenterProtocol?
     let episode: Episode
     let apiManager = APIManager()
+    let imageDownloader = ImageDownloader()
     
     init(episode: Episode) {
         self.episode = episode
@@ -36,16 +37,22 @@ extension EpisodeDetailInteractor: EpisodeDetailInteractorPrortocol {
             
             let group = DispatchGroup()
             var characters: [Character] = []
+            var images: [Int : UIImage] = [:]
             
             for charURL in self.episode.characters {
                 group.enter()
                 apiManager.loadData(with: charURL, for: Character.self) { character in
                     characters.append(character)
-                    group.leave()
+                    self.imageDownloader.downloadImage(with: character.id, for: character.image) { image in
+                        
+                        images[character.id] = image
+                        group.leave()
+                    }
                 }
+              
             }
             group.notify(queue: .main) {
-                self.presenter?.charactersDidShowed(characters: characters)
+                self.presenter?.charactersDidShowed(characters: characters, images: images)
             }
         }
     }

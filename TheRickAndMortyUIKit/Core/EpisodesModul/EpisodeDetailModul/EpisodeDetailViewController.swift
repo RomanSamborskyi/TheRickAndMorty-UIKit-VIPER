@@ -9,7 +9,7 @@ import UIKit
 
 protocol EpisodeDetailViewProtocol: AnyObject {
     func show(episode: Episode)
-    func show(characters: [Character])
+    func show(characters: [Character], images: [Int : UIImage])
 }
 
 class EpisodeDetailViewController: UIViewController {
@@ -18,6 +18,7 @@ class EpisodeDetailViewController: UIViewController {
     var presenter: EpisodeDetailPresenterProtocol?
     lazy private var detailView = EpisodeDetailView()
     private(set) var characters: [Character] = []
+    private(set) var images: [Int : UIImage] = [:]
     lazy private var scrollView: UIScrollView = {
         let view = UIScrollView()
         return view
@@ -109,9 +110,10 @@ extension EpisodeDetailViewController: EpisodeDetailViewProtocol {
         }
     }
     
-    func show(characters: [Character]) {
+    func show(characters: [Character], images: [Int : UIImage]) {
         DispatchQueue.main.async {
             self.characters = characters
+            self.images = images
             self.collectionView.reloadData()
         }
     }
@@ -123,6 +125,9 @@ extension EpisodeDetailViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterViewCell.identifier, for: indexPath) as! CharacterViewCell
         cell.character = characters[indexPath.row]
+        let character = characters[indexPath.row]
+        let poster = self.images[character.id]
+        cell.poster = poster
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
