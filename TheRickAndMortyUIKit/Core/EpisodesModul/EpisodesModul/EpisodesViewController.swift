@@ -76,6 +76,7 @@ extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewData
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+         let episode = episdes[indexPath.row]
+         presenter?.episodeDidSelected(episode: episode)
     }
 }

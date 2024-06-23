@@ -10,7 +10,8 @@ import UIKit
 
 
 protocol EpisodeDetailPresenterProtocol: AnyObject {
-    
+    func viewControllerDidLoad()
+    func epsisoeDidShowed(episode: Episode)
 }
 
 class EpisodeDetailPresenter {
@@ -27,5 +28,11 @@ class EpisodeDetailPresenter {
 }
 //MARK: - protocol conformation
 extension EpisodeDetailPresenter: EpisodeDetailPresenterProtocol {
+    func epsisoeDidShowed(episode: Episode) {
+        view?.show(episode: episode)
+    }
     
+    func viewControllerDidLoad() {
+        interactor.getEpisode()
+    }
 }

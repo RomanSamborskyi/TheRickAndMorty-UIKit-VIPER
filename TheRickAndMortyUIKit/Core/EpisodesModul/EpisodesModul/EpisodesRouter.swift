@@ -9,7 +9,7 @@ import UIKit
 
 
 protocol EpisodesRouterProtocol: AnyObject {
-    
+    func episoeDidOpened(episode: Episode)
 }
 
 class EpisodesRouter {
@@ -19,5 +19,8 @@ class EpisodesRouter {
 }
 //MARK: - protocol conformation
 extension EpisodesRouter: EpisodesRouterProtocol {
-    
+    func episoeDidOpened(episode: Episode) {
+        let detailVC = EpisodeDetailModulBuilder.build(episode: episode)
+        view?.navigationController?.pushViewController(detailVC, animated: true)
+    }
 }

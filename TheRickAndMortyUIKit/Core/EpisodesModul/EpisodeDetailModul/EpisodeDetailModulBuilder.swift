@@ -8,10 +8,10 @@
 import UIKit
 
 
-class EpidodeDetailModulBuilder {
-    static func build() -> EpisodeDetailViewController {
+class EpisodeDetailModulBuilder {
+    static func build(episode: Episode) -> EpisodeDetailViewController {
         let view = EpisodeDetailViewController()
-        let interactor =  EpisodeDetailInteractor()
+        let interactor =  EpisodeDetailInteractor(episode: episode)
         let router = EpisodeDetailRouter()
         let presenter = EpisodeDetailPresenter(interactor: interactor, router: router)
         

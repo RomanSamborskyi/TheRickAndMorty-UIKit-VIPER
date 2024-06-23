@@ -11,6 +11,7 @@ import UIKit
 protocol EpisodesPresenterProtocol: AnyObject {
     func viewControllerDidLoad()
     func episodesDidDowloaded(episodes: [Episode])
+    func episodeDidSelected(episode: Episode)
 }
 
 class EpisodesPresenter {
@@ -27,6 +28,9 @@ class EpisodesPresenter {
 }
 //MARK: - protocol conformation
 extension EpisodesPresenter: EpisodesPresenterProtocol {
+    func episodeDidSelected(episode: Episode) {
+        router.episoeDidOpened(episode: episode)
+    }
     func episodesDidDowloaded(episodes: [Episode]) {
         view?.show(episodes: episodes)
     }
