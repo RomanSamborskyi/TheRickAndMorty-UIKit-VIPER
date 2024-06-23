@@ -53,6 +53,7 @@ class CharacterViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        contentView.layer.borderColor = UIColor.adaptiveColor().cgColor
         contentView.layer.borderWidth = 3
         contentView.layer.cornerRadius = 20
         setupLayout()

@@ -42,9 +42,10 @@ class EpisodesViewCell: UICollectionViewCell {
     }()
     
     let separatorView = UIView.init(frame: CGRect(x: 5, y: UIScreen.main.bounds.height - 1, width: UIScreen.main.bounds.width - 5, height: 1))
-    
+   
     override init(frame: CGRect) {
         super.init(frame: frame)
+        contentView.layer.borderColor = UIColor.adaptiveColor().cgColor 
         contentView.layer.borderWidth = 3
         contentView.layer.cornerRadius = 20
         setupLayout()
