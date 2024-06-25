@@ -9,7 +9,7 @@ import UIKit
 
 
 protocol EpisodeDetailRouterProtocol: AnyObject {
-    
+    func didDetailOpened()
 }
 
 class EpisodeDetailRouter {
@@ -19,5 +19,7 @@ class EpisodeDetailRouter {
 }
 //MARK: - protocol conformation
 extension EpisodeDetailRouter: EpisodeDetailRouterProtocol {
-    
+    func didDetailOpened() {
+        
+    }
 }

@@ -13,6 +13,7 @@ protocol EpisodeDetailPresenterProtocol: AnyObject {
     func viewControllerDidLoad()
     func epsisoeDidShowed(episode: Episode)
     func charactersDidShowed(characters: [Character], images: [Int : UIImage])
+    func didCharacterSelected(episode: Character)
 }
 
 class EpisodeDetailPresenter {
@@ -29,7 +30,9 @@ class EpisodeDetailPresenter {
 }
 //MARK: - protocol conformation
 extension EpisodeDetailPresenter: EpisodeDetailPresenterProtocol {
-
+    func didCharacterSelected(episode: Character) {
+        
+    }
     func charactersDidShowed(characters: [Character], images: [Int : UIImage]) {
         view?.show(characters: characters, images: images)
     }
