@@ -128,6 +128,8 @@ extension EpisodeDetailViewController: UICollectionViewDelegate, UICollectionVie
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //let character = characters[indexPath.row]
+        let character = characters[indexPath.row]
+        guard let image = images[character.id] else { return }
+        presenter?.didCharacterSelected(character: character, image: image)
     }
 }

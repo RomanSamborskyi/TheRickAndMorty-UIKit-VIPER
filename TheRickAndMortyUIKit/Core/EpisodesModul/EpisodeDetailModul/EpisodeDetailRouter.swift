@@ -9,7 +9,7 @@ import UIKit
 
 
 protocol EpisodeDetailRouterProtocol: AnyObject {
-    func didDetailOpened()
+    func didDetailOpenedFor(character: Character, image: UIImage)
 }
 
 class EpisodeDetailRouter {
@@ -19,7 +19,8 @@ class EpisodeDetailRouter {
 }
 //MARK: - protocol conformation
 extension EpisodeDetailRouter: EpisodeDetailRouterProtocol {
-    func didDetailOpened() {
-        
+    func didDetailOpenedFor(character: Character, image: UIImage) {
+        let characterVC = CharacterDetailModuleBuilder.build(charcter: character, image: image)
+        view?.navigationController?.pushViewController(characterVC, animated: true)
     }
 }
