@@ -130,7 +130,7 @@ private extension CharacterDetailView {
         episodesLabel.font = .systemFont(ofSize: 15)
         episodesLabel.textAlignment = .center
         episodesLabel.textColor = .lightGray
-        episodesLabel.text = "Characters"
+        episodesLabel.text = "Episodes"
         
         NSLayoutConstraint.activate([
             episodesLabel.topAnchor.constraint(equalTo: createdDateLabel.bottomAnchor, constant: 20),
