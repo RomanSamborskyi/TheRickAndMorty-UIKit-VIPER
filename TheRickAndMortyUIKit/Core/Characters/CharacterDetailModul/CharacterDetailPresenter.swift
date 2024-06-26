@@ -12,6 +12,8 @@ import UIKit
 protocol CharacterDetailPresenterProtocol: AnyObject {
     func viewControllerDidLoad()
     func showCharacter(character: Character, withImage: UIImage)
+    func show(episode: [Episode])
+    func didEpisodeSelected(episode: Episode)
 }
 
 
@@ -29,6 +31,12 @@ class CharacterDetailPresenter {
 }
 //MARK: - protocol conformation
 extension CharacterDetailPresenter: CharacterDetailPresenterProtocol {
+    func didEpisodeSelected(episode: Episode) {
+        router.didEpisodeDetailOpened(episode: episode)
+    }
+    func show(episode: [Episode]) {
+        view?.didEpisodesShow(episode: episode)
+    }
     func showCharacter(character: Character, withImage: UIImage) {
         view?.showCharacter(character: character, withImage: withImage)
     }

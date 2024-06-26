@@ -14,6 +14,7 @@ protocol CharackterDetailInteractorProtocol: AnyObject {
 
 class CharackterDetailInteractor {
     
+    let apiManager = APIManager()
     let character: Character
     let image: UIImage
     
@@ -28,6 +29,16 @@ class CharackterDetailInteractor {
 //MARK: - protocol conformation
 extension CharackterDetailInteractor: CharackterDetailInteractorProtocol {
     func getCharacter() {
-        presenter?.showCharacter(character: character, withImage: image)
+        
+        var episodes: [Episode] = []
+        for episodeURL in character.episode {
+            apiManager.loadData(with: episodeURL, for: Episode.self) { episode in
+                DispatchQueue.main.async {
+                    episodes.append(episode)
+                    self.presenter?.show(episode: episodes)
+                }
+            }
+        }
+        self.presenter?.showCharacter(character: self.character, withImage: self.image)
     }
 }

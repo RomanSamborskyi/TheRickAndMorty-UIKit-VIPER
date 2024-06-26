@@ -9,6 +9,7 @@ import UIKit
 
 protocol CharacterDetailViewProtocol: AnyObject {
     func showCharacter(character: Character, withImage: UIImage)
+    func didEpisodesShow(episode: [Episode])
 }
 
 class CharacterDetailViewController: UIViewController {
@@ -39,6 +40,12 @@ class CharacterDetailViewController: UIViewController {
 
 //MARK: - protocol conformation
 extension CharacterDetailViewController: CharacterDetailViewProtocol {
+    func didEpisodesShow(episode: [Episode]) {
+        DispatchQueue.main.async {
+            self.episodes = episode
+            self.collectionCell.reloadData()
+        }
+    }
     func showCharacter(character: Character, withImage: UIImage) {
         DispatchQueue.main.async {
             self.details.updateUI(for: character, with: withImage)
@@ -50,7 +57,7 @@ extension CharacterDetailViewController: CharacterDetailViewProtocol {
 private extension CharacterDetailViewController {
     func setupLayout() {
         view.backgroundColor = .systemBackground
-        setupScrollView()
+        self.setupScrollView()
     }
     
     func setupScrollView() {
@@ -90,11 +97,16 @@ private extension CharacterDetailViewController {
 }
 extension CharacterDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
+        return self.episodes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodesViewCell.identifier, for: indexPath) as! EpisodesViewCell
+        cell.episode = episodes[indexPath.row]
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let episode = self.episodes[indexPath.row]
+        presenter?.didEpisodeSelected(episode: episode)
     }
 }

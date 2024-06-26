@@ -9,14 +9,17 @@ import Foundation
 
 
 protocol CharacterDetailRouterProtocol: AnyObject {
-    
+    func didEpisodeDetailOpened(episode: Episode)
 }
 class CharacterDetailRouter {
     
-    weak var view: CharacterDetailViewProtocol?
+    weak var view: CharacterDetailViewController?
     
 }
 //MARK: - protocol conformation
 extension CharacterDetailRouter: CharacterDetailRouterProtocol {
-    
+    func didEpisodeDetailOpened(episode: Episode) {
+        let detailVC = EpisodeDetailModulBuilder.build(episode: episode)
+        view?.navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
