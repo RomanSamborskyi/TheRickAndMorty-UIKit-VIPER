@@ -63,6 +63,26 @@ class CharacterDetailView: UIView {
         let label = UILabel()
         return label
     }()
+    lazy private var locationLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    lazy private var locationButton: UIButton = {
+        let label = UIButton()
+        return label
+    }()
+    lazy private var createdLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    lazy private var createdDateLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    lazy private var episodesLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
     //MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -77,7 +97,7 @@ class CharacterDetailView: UIView {
         nameLabel.text = character.name
         speciesLabel.text = character.species
         genderLabel.text = character.gender
-        
+        createdDateLabel.text = character.created
         switch character.status {
         case "Dead":
             statusLabel.text = character.status + " " + "🔴"
@@ -100,8 +120,79 @@ private extension CharacterDetailView {
         setupStatusLabel()
         setupSpeciesLabel()
         setupTypeLabel()
+        setupLocationBuuton()
+        setupCreatedLabel()
+        setupEpisodesLabel()
     }
-    
+    func setupEpisodesLabel() {
+        self.addSubview(episodesLabel)
+        episodesLabel.translatesAutoresizingMaskIntoConstraints = false
+        episodesLabel.font = .systemFont(ofSize: 15)
+        episodesLabel.textAlignment = .center
+        episodesLabel.textColor = .lightGray
+        episodesLabel.text = "Characters"
+        
+        NSLayoutConstraint.activate([
+            episodesLabel.topAnchor.constraint(equalTo: createdDateLabel.bottomAnchor, constant: 20),
+            episodesLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            episodesLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 2.3),
+            episodesLabel.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.025),
+        ])
+    }
+    func setupCreatedLabel() {
+        self.addSubview(createdDateLabel)
+        self.addSubview(createLabel)
+        createdDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        createLabel.translatesAutoresizingMaskIntoConstraints = false
+        createdDateLabel.layer.borderColor = UIColor.adaptiveColor().cgColor
+        createdDateLabel.layer.borderWidth = 3
+        createdDateLabel.layer.cornerRadius = 15
+        createdDateLabel.textAlignment = .center
+        
+        createLabel.font = .systemFont(ofSize: 15)
+        createLabel.textAlignment = .center
+        createLabel.textColor = .lightGray
+        createLabel.text = "created"
+        
+        NSLayoutConstraint.activate([
+            createLabel.topAnchor.constraint(equalTo: locationButton.bottomAnchor, constant: 20),
+            createLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            createLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 2.3),
+            createLabel.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.025),
+            
+            createdDateLabel.topAnchor.constraint(equalTo: createLabel.bottomAnchor, constant: 5),
+            createdDateLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
+            createdDateLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
+            createdDateLabel.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.065),
+        ])
+    }
+    func setupLocationBuuton() {
+        self.addSubview(locationButton)
+        self.addSubview(locationLabel)
+        locationButton.translatesAutoresizingMaskIntoConstraints = false
+        locationLabel.translatesAutoresizingMaskIntoConstraints = false
+        locationButton.titleLabel?.text = "Location here"
+        locationButton.layer.borderColor = UIColor.adaptiveColor().cgColor
+        locationButton.layer.borderWidth = 3
+        locationButton.layer.cornerRadius = 15
+        
+        locationLabel.font = .systemFont(ofSize: 15)
+        locationLabel.textAlignment = .center
+        locationLabel.textColor = .lightGray
+        locationLabel.text = "location"
+        
+        NSLayoutConstraint.activate([
+            locationLabel.topAnchor.constraint(equalTo: speciesLabel.bottomAnchor, constant: 20),
+            locationLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            locationLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 2.3),
+            locationLabel.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.025),
+            
+            locationButton.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5),
+            locationButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
+            locationButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
+            locationButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.065),
+        ])
+    }
     func setupImageView() {
         self.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -109,7 +200,7 @@ private extension CharacterDetailView {
         imageView.layer.cornerRadius = 15
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 140),
+            imageView.topAnchor.constraint(equalTo: self.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             imageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 2)
