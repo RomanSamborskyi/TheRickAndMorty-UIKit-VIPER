@@ -9,7 +9,8 @@ import UIKit
 
 
 protocol LocationsPresenterProtocol: AnyObject {
-    
+    func viewControllerDidLoad()
+    func didLocationsDownload(locations: [SingleLocation])
 }
 
 
@@ -26,5 +27,10 @@ class LocationsPresenter {
 }
 //MARK: - protocol conformation
 extension LocationsPresenter: LocationsPresenterProtocol {
-    
+    func didLocationsDownload(locations: [SingleLocation]) {
+        view?.show(locations: locations)
+    }
+    func viewControllerDidLoad() {
+        interactor.fetchLocations()
+    }
 }

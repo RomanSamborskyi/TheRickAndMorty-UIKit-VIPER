@@ -78,7 +78,6 @@ private extension EpisodeDetailViewController {
             detailView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             detailView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             detailView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            detailView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 6),
             detailView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
         ])
     }

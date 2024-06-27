@@ -47,6 +47,7 @@
 		6BD6D0622C285F1E00DAADD0 /* EpisodeDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6D0612C285F1E00DAADD0 /* EpisodeDetailRouter.swift */; };
 		6BD6D0642C285F7200DAADD0 /* EpisodeDetailModulBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6D0632C285F7200DAADD0 /* EpisodeDetailModulBuilder.swift */; };
 		6BD6D0662C2862D200DAADD0 /* EpisodeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6D0652C2862D200DAADD0 /* EpisodeDetailView.swift */; };
+		6BD6D0682C2DB2D000DAADD0 /* LocationsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6D0672C2DB2D000DAADD0 /* LocationsCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,7 @@
 		6BD6D0612C285F1E00DAADD0 /* EpisodeDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailRouter.swift; sourceTree = "<group>"; };
 		6BD6D0632C285F7200DAADD0 /* EpisodeDetailModulBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailModulBuilder.swift; sourceTree = "<group>"; };
 		6BD6D0652C2862D200DAADD0 /* EpisodeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailView.swift; sourceTree = "<group>"; };
+		6BD6D0672C2DB2D000DAADD0 /* LocationsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 				6BD6D0172C2347C300DAADD0 /* LocationsViewController.swift */,
 				6BD6D0452C271F7300DAADD0 /* LocationsPresenter.swift */,
 				6BD6D0472C271F8100DAADD0 /* LocationInteractor.swift */,
+				6BD6D0672C2DB2D000DAADD0 /* LocationsCollectionViewCell.swift */,
 				6BD6D0492C271F8E00DAADD0 /* LocationRouter.swift */,
 				6BD6D04B2C27214C00DAADD0 /* LocationsModulBuilder.swift */,
 			);
@@ -332,6 +335,7 @@
 				6BD6D0422C26F35D00DAADD0 /* CharacterDetailView.swift in Sources */,
 				6BD6D01F2C2373A600DAADD0 /* APIManager.swift in Sources */,
 				6BD6D05C2C285DD800DAADD0 /* EpisodeDetailViewController.swift in Sources */,
+				6BD6D0682C2DB2D000DAADD0 /* LocationsCollectionViewCell.swift in Sources */,
 				6BD6D0572C2743FF00DAADD0 /* EpisodesViewCell.swift in Sources */,
 				6BD6D0332C26B32700DAADD0 /* ImageDownloader.swift in Sources */,
 				6BD6D0662C2862D200DAADD0 /* EpisodeDetailView.swift in Sources */,
