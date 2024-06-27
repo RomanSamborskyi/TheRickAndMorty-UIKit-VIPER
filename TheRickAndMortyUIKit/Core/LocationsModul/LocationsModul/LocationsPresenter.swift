@@ -11,6 +11,7 @@ import UIKit
 protocol LocationsPresenterProtocol: AnyObject {
     func viewControllerDidLoad()
     func didLocationsDownload(locations: [SingleLocation])
+    func didLocationSelected(location: SingleLocation)
 }
 
 
@@ -27,6 +28,9 @@ class LocationsPresenter {
 }
 //MARK: - protocol conformation
 extension LocationsPresenter: LocationsPresenterProtocol {
+    func didLocationSelected(location: SingleLocation) {
+        router.didLocationSelected(location: location)
+    }
     func didLocationsDownload(locations: [SingleLocation]) {
         view?.show(locations: locations)
     }

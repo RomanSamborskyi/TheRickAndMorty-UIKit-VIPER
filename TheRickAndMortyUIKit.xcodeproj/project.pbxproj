@@ -48,6 +48,12 @@
 		6BD6D0642C285F7200DAADD0 /* EpisodeDetailModulBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6D0632C285F7200DAADD0 /* EpisodeDetailModulBuilder.swift */; };
 		6BD6D0662C2862D200DAADD0 /* EpisodeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6D0652C2862D200DAADD0 /* EpisodeDetailView.swift */; };
 		6BD6D0682C2DB2D000DAADD0 /* LocationsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6D0672C2DB2D000DAADD0 /* LocationsCollectionViewCell.swift */; };
+		6BD6D06B2C2DB8BA00DAADD0 /* LocationDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6D06A2C2DB8BA00DAADD0 /* LocationDetailInteractor.swift */; };
+		6BD6D06D2C2DB93300DAADD0 /* LocationDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6D06C2C2DB93300DAADD0 /* LocationDetailPresenter.swift */; };
+		6BD6D06F2C2DB9BD00DAADD0 /* LocationsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6D06E2C2DB9BD00DAADD0 /* LocationsDetailViewController.swift */; };
+		6BD6D0712C2DBB4000DAADD0 /* LocationDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6D0702C2DBB4000DAADD0 /* LocationDetailRouter.swift */; };
+		6BD6D0732C2DBC2400DAADD0 /* LoactionDetailModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6D0722C2DBC2400DAADD0 /* LoactionDetailModuleBuilder.swift */; };
+		6BD6D0752C2DBF8700DAADD0 /* LocatioDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6D0742C2DBF8700DAADD0 /* LocatioDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +100,12 @@
 		6BD6D0632C285F7200DAADD0 /* EpisodeDetailModulBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailModulBuilder.swift; sourceTree = "<group>"; };
 		6BD6D0652C2862D200DAADD0 /* EpisodeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailView.swift; sourceTree = "<group>"; };
 		6BD6D0672C2DB2D000DAADD0 /* LocationsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsCollectionViewCell.swift; sourceTree = "<group>"; };
+		6BD6D06A2C2DB8BA00DAADD0 /* LocationDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailInteractor.swift; sourceTree = "<group>"; };
+		6BD6D06C2C2DB93300DAADD0 /* LocationDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailPresenter.swift; sourceTree = "<group>"; };
+		6BD6D06E2C2DB9BD00DAADD0 /* LocationsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsDetailViewController.swift; sourceTree = "<group>"; };
+		6BD6D0702C2DBB4000DAADD0 /* LocationDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailRouter.swift; sourceTree = "<group>"; };
+		6BD6D0722C2DBC2400DAADD0 /* LoactionDetailModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoactionDetailModuleBuilder.swift; sourceTree = "<group>"; };
+		6BD6D0742C2DBF8700DAADD0 /* LocatioDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocatioDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +195,7 @@
 		6BD6D00F2C2345A700DAADD0 /* LocationsModul */ = {
 			isa = PBXGroup;
 			children = (
+				6BD6D0692C2DB89800DAADD0 /* LocationDetailModul */,
 				6BD6D0442C271F5B00DAADD0 /* LocationsModul */,
 			);
 			path = LocationsModul;
@@ -260,6 +273,19 @@
 			path = EpisodeDetailModul;
 			sourceTree = "<group>";
 		};
+		6BD6D0692C2DB89800DAADD0 /* LocationDetailModul */ = {
+			isa = PBXGroup;
+			children = (
+				6BD6D06A2C2DB8BA00DAADD0 /* LocationDetailInteractor.swift */,
+				6BD6D06C2C2DB93300DAADD0 /* LocationDetailPresenter.swift */,
+				6BD6D06E2C2DB9BD00DAADD0 /* LocationsDetailViewController.swift */,
+				6BD6D0702C2DBB4000DAADD0 /* LocationDetailRouter.swift */,
+				6BD6D0722C2DBC2400DAADD0 /* LoactionDetailModuleBuilder.swift */,
+				6BD6D0742C2DBF8700DAADD0 /* LocatioDetailView.swift */,
+			);
+			path = LocationDetailModul;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -330,15 +356,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BD6D06B2C2DB8BA00DAADD0 /* LocationDetailInteractor.swift in Sources */,
 				6BD6D04E2C2740B900DAADD0 /* EpisodesInteractor.swift in Sources */,
 				6BD6D0232C2497A500DAADD0 /* CharactersPresenter.swift in Sources */,
 				6BD6D0422C26F35D00DAADD0 /* CharacterDetailView.swift in Sources */,
 				6BD6D01F2C2373A600DAADD0 /* APIManager.swift in Sources */,
 				6BD6D05C2C285DD800DAADD0 /* EpisodeDetailViewController.swift in Sources */,
 				6BD6D0682C2DB2D000DAADD0 /* LocationsCollectionViewCell.swift in Sources */,
+				6BD6D0732C2DBC2400DAADD0 /* LoactionDetailModuleBuilder.swift in Sources */,
 				6BD6D0572C2743FF00DAADD0 /* EpisodesViewCell.swift in Sources */,
 				6BD6D0332C26B32700DAADD0 /* ImageDownloader.swift in Sources */,
 				6BD6D0662C2862D200DAADD0 /* EpisodeDetailView.swift in Sources */,
+				6BD6D06F2C2DB9BD00DAADD0 /* LocationsDetailViewController.swift in Sources */,
 				6BD6D01B2C2347E700DAADD0 /* EpisodesViewController.swift in Sources */,
 				6BD6D0642C285F7200DAADD0 /* EpisodeDetailModulBuilder.swift in Sources */,
 				6BD6D0402C26EFD600DAADD0 /* CharacterDetailViewController.swift in Sources */,
@@ -348,14 +377,17 @@
 				6BD6D0522C27415000DAADD0 /* EpisodesRouter.swift in Sources */,
 				6BD6D0622C285F1E00DAADD0 /* EpisodeDetailRouter.swift in Sources */,
 				6BD6D05E2C285E6600DAADD0 /* EpisodeDetailInteractor.swift in Sources */,
+				6BD6D06D2C2DB93300DAADD0 /* LocationDetailPresenter.swift in Sources */,
 				6BD6CFFB2C233EA700DAADD0 /* CharactersViewController.swift in Sources */,
 				6BD6D0462C271F7300DAADD0 /* LocationsPresenter.swift in Sources */,
 				6BD6D0382C26EF8700DAADD0 /* CharackterDetailInteractor.swift in Sources */,
 				6BD6D0252C24987B00DAADD0 /* CharactersInteractor.swift in Sources */,
+				6BD6D0712C2DBB4000DAADD0 /* LocationDetailRouter.swift in Sources */,
 				6BD6D04A2C271F8E00DAADD0 /* LocationRouter.swift in Sources */,
 				6BD6D0292C249A9C00DAADD0 /* CharactersModulBuilder.swift in Sources */,
 				6BD6D03C2C26EFB600DAADD0 /* CharacterDetailModuleBuilder.swift in Sources */,
 				6BD6CFF72C233EA700DAADD0 /* AppDelegate.swift in Sources */,
+				6BD6D0752C2DBF8700DAADD0 /* LocatioDetailView.swift in Sources */,
 				6BD6D04C2C27214C00DAADD0 /* LocationsModulBuilder.swift in Sources */,
 				6BD6D0502C2740FF00DAADD0 /* EpisodesPresenter.swift in Sources */,
 				6BD6D0312C24B43A00DAADD0 /* CharacterViewCell.swift in Sources */,

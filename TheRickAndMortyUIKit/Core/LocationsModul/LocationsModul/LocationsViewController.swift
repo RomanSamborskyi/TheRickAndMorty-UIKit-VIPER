@@ -45,7 +45,7 @@ class LocationsViewController: UIViewController {
 //MARK: - layout
 private extension LocationsViewController {
     func setupLayout() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.setupScrollView()
             self.setupCollectionView()
         }
@@ -95,6 +95,7 @@ extension LocationsViewController: UICollectionViewDataSource, UICollectionViewD
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = self.locations[indexPath.row]
+        let location = self.locations[indexPath.row]
+        presenter?.didLocationSelected(location: location)
     }
 }

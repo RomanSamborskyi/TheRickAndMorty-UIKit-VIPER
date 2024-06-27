@@ -9,7 +9,7 @@ import UIKit
 
 
 protocol LocationRouterProtocol: AnyObject {
-    
+    func didLocationSelected(location: SingleLocation)
 }
 
 class LocationRouter {
@@ -18,5 +18,8 @@ class LocationRouter {
 }
 //MARK: - protocol conformation
 extension LocationRouter: LocationRouterProtocol {
-    
+    func didLocationSelected(location: SingleLocation) {
+        let detailVC = LoactionDetailModuleBuilder.build(loaction: location)
+        view?.navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
