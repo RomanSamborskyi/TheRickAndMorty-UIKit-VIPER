@@ -23,9 +23,14 @@ extension LocationInteractor: LocationInteractorPrortocol {
         
         cqueue.async { [weak self] in
             guard let self = self else { return }
-            self.apiManager.loadData(with: "https://rickandmortyapi.com/api/location", for: LocationRsponse.self) { location in
-                DispatchQueue.main.async {
-                    self.presenter?.didLocationsDownload(locations: location.results)
+            self.apiManager.loadData(with: LocationsURLEndpopints.allLocations.endpoint, for: LocationRsponse.self) { result in
+                switch result {
+                case .success(let location):
+                    DispatchQueue.main.async {
+                        self.presenter?.didLocationsDownload(locations: location.results)
+                    }
+                case .failure(let failure):
+                    print(failure.localizedDescription)
                 }
             }
         }

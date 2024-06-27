@@ -31,14 +31,21 @@ extension CharackterDetailInteractor: CharackterDetailInteractorProtocol {
     func getCharacter() {
         
         var episodes: [Episode] = []
+        
         for episodeURL in character.episode {
-            apiManager.loadData(with: episodeURL, for: Episode.self) { episode in
-                DispatchQueue.main.async {
-                    episodes.append(episode)
-                    self.presenter?.show(episode: episodes)
+            apiManager.loadData(with: episodeURL, for: Episode.self) { result in
+                switch result {
+                case .success(let episode):
+                    DispatchQueue.main.async {
+                        episodes.append(episode)
+                        self.presenter?.show(episode: episodes)
+                    }
+                case .failure(let failure):
+                    print(failure.localizedDescription)
                 }
             }
         }
+        
         self.presenter?.showCharacter(character: self.character, withImage: self.image)
     }
 }

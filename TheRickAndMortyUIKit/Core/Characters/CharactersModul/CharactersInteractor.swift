@@ -31,24 +31,35 @@ extension CharactersInteractor: CharactersInteractorPrortocol {
             
             guard let self = self else { return }
             
-            self.apiManager.loadData(with: "https://rickandmortyapi.com/api/character", for: CharacterResponse.self, complition: { response in
-                self.presenter?.charactersDidLoad(character: response.results)
+            self.apiManager.loadData(with: CharacterURLEndpopints.allCharacters.endpoint, for: CharacterResponse.self, complition: { result in
                 
-                var images: [Int : UIImage] = [:]
-                let dispatchGroup = DispatchGroup()
-                
-                for character in response.results {
-                    dispatchGroup.enter()
-                    self.imageDownloader.downloadImage(with: character.id, for: character.image) { image in
-                        DispatchQueue.main.async {
-                            images[character.id] = image
+                switch result {
+                case .success(let response):
+                    self.presenter?.charactersDidLoad(character: response.results)
+                    
+                    var images: [Int : UIImage] = [:]
+                    let dispatchGroup = DispatchGroup()
+                    
+                    for character in response.results {
+                        dispatchGroup.enter()
+                        self.imageDownloader.downloadImage(with: character.id, for: character.image) { result in
+                            switch result {
+                            case .success(let image):
+                                DispatchQueue.main.async {
+                                    images[character.id] = image
+                                }
+                                dispatchGroup.leave()
+                            case .failure(let failure):
+                                print(failure.localizedDescription)
+                            }
                         }
-                        dispatchGroup.leave()
                     }
-                }
-                
-                dispatchGroup.notify(queue: .main) {
-                    self.presenter?.imageDidLoaded(images: images)
+                    
+                    dispatchGroup.notify(queue: .main) {
+                        self.presenter?.imageDidLoaded(images: images)
+                    }
+                case .failure(let failure):
+                    print(failure.localizedDescription)
                 }
             })
         }

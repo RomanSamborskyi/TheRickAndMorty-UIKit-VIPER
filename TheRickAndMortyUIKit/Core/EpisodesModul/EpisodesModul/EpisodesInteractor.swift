@@ -25,11 +25,17 @@ extension EpisodesInteractor: EpisodesInteractorPrortocol {
         
         cqueue.async { [weak self] in
             guard let self = self else { return }
-            self.apiManager.loadData(with: "https://rickandmortyapi.com/api/episode", for: EpisodesResponse.self) { result in
+            self.apiManager.loadData(with: EpisodesURLEndpopints.allEpisodes.endpoint, for: EpisodesResponse.self) { result in
                 
-                DispatchQueue.main.async {
-                    self.presenter?.episodesDidDowloaded(episodes: result.results)
+                switch result {
+                case .success(let result):
+                    DispatchQueue.main.async {
+                        self.presenter?.episodesDidDowloaded(episodes: result.results)
+                    }
+                case .failure(let failure):
+                    print(failure.localizedDescription)
                 }
+                
             }
         }
     }

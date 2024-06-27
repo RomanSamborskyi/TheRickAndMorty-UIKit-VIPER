@@ -38,21 +38,29 @@ class LocationDetailInteractor: LocationDetailInteractorProtocol {
                 
                 group.enter()
                 
-                self.apiManager.loadData(with: residentsURL, for: Character.self) { resident in
-                    lock.lock()
-                    characters.append(resident)
-                    lock.unlock()
-                    
-                    group.enter()
-                    self.imageDownloader.downloadImage(with: resident.id, for: resident.image) { image in
-                        DispatchQueue.main.async {
-                            lock.lock()
-                            images[resident.id] = image
-                            lock.unlock()
+                self.apiManager.loadData(with: residentsURL, for: Character.self) { result in
+                    switch result {
+                    case .success(let resident):
+                        lock.lock()
+                        characters.append(resident)
+                        lock.unlock()
+                        
+                        group.enter()
+                        self.imageDownloader.downloadImage(with: resident.id, for: resident.image) { result in
+                            switch result {
+                            case .success(let image):
+                                DispatchQueue.main.async {
+                                    images[resident.id] = image
+                                }
+                                group.leave()
+                            case .failure(let failure):
+                                print(failure.localizedDescription)
+                            }
                         }
                         group.leave()
+                    case .failure(let failure):
+                        print(failure.localizedDescription)
                     }
-                    group.leave()
                 }
             }
             group.notify(queue: .main) {

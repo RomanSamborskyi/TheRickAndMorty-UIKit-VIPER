@@ -11,27 +11,35 @@ import Foundation
 
 class APIManager {
     
-    func loadData<T: Codable>(with url: String, for type: T.Type, complition: @escaping ((T) -> Void))  {
-        guard let url = URL(string: url) else { return }
+    func loadData<T: Codable>(with url: String, for type: T.Type, complition: @escaping (Result<T,AppError>) -> Void)  {
+        guard let url = URL(string: url) else {
+            complition(.failure(AppError.badURL))
+            return
+        }
         let session = URLSession.shared.dataTask(with: url) { data, response, error in
             let data = self.sessionHandler(data: data, response: response)
             let decoder = JSONDecoder()
-            let result = try? decoder.decode(T.self, from: data)
             
-            if let result = result {
-                complition(result)
+            switch data {
+            case .success(let data):
+                let result = try? decoder.decode(T.self, from: data)
+                if let result = result {
+                    complition(.success(result))
+                }
+            case .failure(let failure):
+                print(failure.localizedDescription)
             }
         }
         session.resume()
     }
     
-    private func sessionHandler(data: Data?, response: URLResponse?) -> Data {
+    private func sessionHandler(data: Data?, response: URLResponse?) -> Result<Data, AppError> {
         guard let data = data,
               let response = response as? HTTPURLResponse,
               response.statusCode >= 200 && response.statusCode < 300 else {
-            fatalError("fatal error")
+            return .failure(AppError.badResponse)
         }
-        return data
+        return .success(data)
     }
 }
 

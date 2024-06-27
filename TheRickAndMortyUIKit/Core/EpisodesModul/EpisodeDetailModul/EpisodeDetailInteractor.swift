@@ -41,12 +41,21 @@ extension EpisodeDetailInteractor: EpisodeDetailInteractorPrortocol {
             
             for charURL in self.episode.characters {
                 group.enter()
-                apiManager.loadData(with: charURL, for: Character.self) { character in
-                    characters.append(character)
-                    self.imageDownloader.downloadImage(with: character.id, for: character.image) { image in
-                        
-                        images[character.id] = image
-                        group.leave()
+                apiManager.loadData(with: charURL, for: Character.self) { result in
+                    switch result {
+                    case .success(let character):
+                        characters.append(character)
+                        self.imageDownloader.downloadImage(with: character.id, for: character.image) { result in
+                            switch result {
+                            case .success(let image):
+                                images[character.id] = image
+                                group.leave()
+                            case .failure(let failure):
+                                print(failure.localizedDescription)
+                            }
+                        }
+                    case .failure(let failure):
+                        print(failure.localizedDescription)
                     }
                 }
               
