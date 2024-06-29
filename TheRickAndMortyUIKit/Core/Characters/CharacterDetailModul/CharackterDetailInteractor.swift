@@ -10,6 +10,7 @@ import UIKit
 
 protocol CharackterDetailInteractorProtocol: AnyObject {
     func getCharacter()
+    func getLocation()
 }
 
 class CharackterDetailInteractor {
@@ -28,20 +29,48 @@ class CharackterDetailInteractor {
 }
 //MARK: - protocol conformation
 extension CharackterDetailInteractor: CharackterDetailInteractorProtocol {
-    func getCharacter() {
+    
+    func getLocation() {
+        guard let locaionURL = character.location?.url  else { return }
         
-        var episodes: [Episode] = []
+        let cqueue = DispatchQueue(label: "character.location.fetch")
         
-        for episodeURL in character.episode {
-            apiManager.loadData(with: episodeURL, for: Episode.self) { result in
+        cqueue.async { [weak self] in
+            guard let self = self else { return }
+            
+            self.apiManager.loadData(with: locaionURL, for: SingleLocation.self) { result in
                 switch result {
-                case .success(let episode):
+                case .success(let location):
                     DispatchQueue.main.async {
-                        episodes.append(episode)
-                        self.presenter?.show(episode: episodes)
+                        self.presenter?.showLocation(location: location)
                     }
                 case .failure(let failure):
                     print(failure.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func getCharacter() {
+        
+        let cqueue = DispatchQueue(label: "character.detail.fetch")
+        var episodes: [Episode] = []
+       
+        cqueue.async { [weak self] in
+            
+            guard let self = self else { return }
+            
+            for episodeURL in character.episode {
+                apiManager.loadData(with: episodeURL, for: Episode.self) { result in
+                    switch result {
+                    case .success(let episode):
+                        DispatchQueue.main.async {
+                            episodes.append(episode)
+                            self.presenter?.show(episode: episodes)
+                        }
+                    case .failure(let failure):
+                        print(failure.localizedDescription)
+                    }
                 }
             }
         }

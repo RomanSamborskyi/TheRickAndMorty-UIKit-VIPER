@@ -52,10 +52,10 @@ class LocationDetailInteractor: LocationDetailInteractorProtocol {
                                 DispatchQueue.main.async {
                                     images[resident.id] = image
                                 }
-                                group.leave()
                             case .failure(let failure):
                                 print(failure.localizedDescription)
                             }
+                            group.leave()
                         }
                         group.leave()
                     case .failure(let failure):

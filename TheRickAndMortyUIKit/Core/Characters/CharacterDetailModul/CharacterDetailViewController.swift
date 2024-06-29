@@ -38,7 +38,7 @@ class CharacterDetailViewController: UIViewController {
     }
 }
 
-//MARK: - protocol conformation
+//MARK: - CharacterDetailViewProtocol protocol conformation
 extension CharacterDetailViewController: CharacterDetailViewProtocol {
     func didEpisodesShow(episode: [Episode]) {
         DispatchQueue.main.async {
@@ -54,12 +54,18 @@ extension CharacterDetailViewController: CharacterDetailViewProtocol {
         }
     }
 }
+//MARK: - setup layout
 private extension CharacterDetailViewController {
     func setupLayout() {
         view.backgroundColor = .systemBackground
         self.setupScrollView()
+        action()
     }
-    
+    func action() {
+        details.buttonAction = { [weak self] in
+            self?.presenter?.didLocationFetch()
+        }
+    }
     func setupScrollView() {
         let margins = view.layoutMarginsGuide
         view.addSubview(scrlView)
@@ -95,6 +101,7 @@ private extension CharacterDetailViewController {
         ])
     }
 }
+//MARK: - Collection View data source ad delegate protocol
 extension CharacterDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.episodes.count

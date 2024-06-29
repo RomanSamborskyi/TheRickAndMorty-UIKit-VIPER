@@ -10,6 +10,7 @@ import Foundation
 
 protocol CharacterDetailRouterProtocol: AnyObject {
     func didEpisodeDetailOpened(episode: Episode)
+    func didLocationOpsen(location: SingleLocation)
 }
 class CharacterDetailRouter {
     
@@ -18,6 +19,10 @@ class CharacterDetailRouter {
 }
 //MARK: - protocol conformation
 extension CharacterDetailRouter: CharacterDetailRouterProtocol {
+    func didLocationOpsen(location: SingleLocation) {
+        let detailVC = LocationDetailModuleBuilder.build(loaction: location)
+        view?.navigationController?.pushViewController(detailVC, animated: true)
+    }
     func didEpisodeDetailOpened(episode: Episode) {
         let detailVC = EpisodeDetailModulBuilder.build(episode: episode)
         view?.navigationController?.pushViewController(detailVC, animated: true)

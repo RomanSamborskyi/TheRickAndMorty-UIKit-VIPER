@@ -49,7 +49,6 @@ extension EpisodeDetailInteractor: EpisodeDetailInteractorPrortocol {
                             switch result {
                             case .success(let image):
                                 images[character.id] = image
-                                group.leave()
                             case .failure(let failure):
                                 print(failure.localizedDescription)
                             }
@@ -57,6 +56,7 @@ extension EpisodeDetailInteractor: EpisodeDetailInteractorPrortocol {
                     case .failure(let failure):
                         print(failure.localizedDescription)
                     }
+                    group.leave()
                 }
               
             }

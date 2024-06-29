@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoactionDetailModuleBuilder {
+class LocationDetailModuleBuilder {
     static func build(loaction: SingleLocation) -> LocationsDetailViewController {
         let view = LocationsDetailViewController()
         let interactor = LocationDetailInteractor(location: loaction)

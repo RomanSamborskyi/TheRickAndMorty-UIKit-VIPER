@@ -83,6 +83,8 @@ class CharacterDetailView: UIView {
         let label = UILabel()
         return label
     }()
+    //MARK: - action
+    var buttonAction: (()-> Void)?
     //MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -98,6 +100,7 @@ class CharacterDetailView: UIView {
         speciesLabel.text = character.species
         genderLabel.text = character.gender
         createdDateLabel.text = character.created
+        locationButton.setTitle(character.location?.name, for: .normal)
         switch character.status {
         case "Dead":
             statusLabel.text = character.status + " " + "🔴"
@@ -114,6 +117,7 @@ class CharacterDetailView: UIView {
 private extension CharacterDetailView {
     func setupLayout() {
         self.backgroundColor = .systemBackground
+        locationButton.setTitle("Location here", for: .normal)
         setupImageView()
         setupNameLabel()
         setupGenderLabel()
@@ -171,10 +175,12 @@ private extension CharacterDetailView {
         self.addSubview(locationLabel)
         locationButton.translatesAutoresizingMaskIntoConstraints = false
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
-        locationButton.titleLabel?.text = "Location here"
+        locationButton.setTitle("Location", for: .normal)
+        locationButton.setTitleColor(UIColor.adaptiveColor(), for: .normal)
         locationButton.layer.borderColor = UIColor.adaptiveColor().cgColor
         locationButton.layer.borderWidth = 3
         locationButton.layer.cornerRadius = 15
+        locationButton.addTarget(self, action: #selector(pushLocation), for: .touchUpInside)
         
         locationLabel.font = .systemFont(ofSize: 15)
         locationLabel.textAlignment = .center
@@ -333,5 +339,10 @@ private extension CharacterDetailView {
             typeLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 2.3),
             typeLabel.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.065),
         ])
+    }
+}
+private extension CharacterDetailView {
+    @objc func pushLocation(sender: UIButton) {
+        buttonAction?()
     }
 }

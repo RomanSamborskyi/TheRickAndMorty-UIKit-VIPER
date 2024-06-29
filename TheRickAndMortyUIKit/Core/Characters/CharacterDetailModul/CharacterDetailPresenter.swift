@@ -14,6 +14,8 @@ protocol CharacterDetailPresenterProtocol: AnyObject {
     func showCharacter(character: Character, withImage: UIImage)
     func show(episode: [Episode])
     func didEpisodeSelected(episode: Episode)
+    func didLocationFetch()
+    func showLocation(location: SingleLocation)
 }
 
 
@@ -31,6 +33,12 @@ class CharacterDetailPresenter {
 }
 //MARK: - protocol conformation
 extension CharacterDetailPresenter: CharacterDetailPresenterProtocol {
+    func didLocationFetch() {
+        interactor.getLocation()
+    }
+    func showLocation(location: SingleLocation) {
+        router.didLocationOpsen(location: location)
+    }
     func didEpisodeSelected(episode: Episode) {
         router.didEpisodeDetailOpened(episode: episode)
     }

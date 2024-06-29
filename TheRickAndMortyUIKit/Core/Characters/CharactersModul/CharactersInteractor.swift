@@ -45,13 +45,11 @@ extension CharactersInteractor: CharactersInteractorPrortocol {
                         self.imageDownloader.downloadImage(with: character.id, for: character.image) { result in
                             switch result {
                             case .success(let image):
-                                DispatchQueue.main.async {
-                                    images[character.id] = image
-                                }
-                                dispatchGroup.leave()
+                                images[character.id] = image
                             case .failure(let failure):
                                 print(failure.localizedDescription)
                             }
+                            dispatchGroup.leave()
                         }
                     }
                     

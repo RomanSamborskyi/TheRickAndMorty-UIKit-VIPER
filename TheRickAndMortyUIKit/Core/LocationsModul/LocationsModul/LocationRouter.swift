@@ -19,7 +19,7 @@ class LocationRouter {
 //MARK: - protocol conformation
 extension LocationRouter: LocationRouterProtocol {
     func didLocationSelected(location: SingleLocation) {
-        let detailVC = LoactionDetailModuleBuilder.build(loaction: location)
+        let detailVC = LocationDetailModuleBuilder.build(loaction: location)
         view?.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
