@@ -23,44 +23,42 @@ class LocationDetailInteractor: LocationDetailInteractorProtocol {
     }
     
     func fetchLoaction() {
-        let cqueue = DispatchQueue(label: "location.detail.get")
+        
+        let cqueue = DispatchQueue(label: "location.detail.get", attributes: .concurrent)
+        
+        let group = DispatchGroup()
+        var characters: [Character] = []
+        var images: [Int : UIImage] = [:]
+        let semaphore = DispatchSemaphore(value: 1)
+        
         
         cqueue.async { [weak self] in
             
             guard let self = self else { return }
             
-            let group = DispatchGroup()
-            var characters: [Character] = []
-            var images: [Int : UIImage] = [:]
-            let lock = NSLock()
-            
             for residentsURL in self.location.residents {
-                
                 group.enter()
-                
                 self.apiManager.loadData(with: residentsURL, for: Character.self) { result in
                     switch result {
                     case .success(let resident):
-                        lock.lock()
+                        semaphore.signal()
                         characters.append(resident)
-                        lock.unlock()
+                        semaphore.wait()
                         
                         group.enter()
                         self.imageDownloader.downloadImage(with: resident.id, for: resident.image) { result in
                             switch result {
                             case .success(let image):
-                                DispatchQueue.main.async {
-                                    images[resident.id] = image
-                                }
+                                images[resident.id] = image
                             case .failure(let failure):
                                 print(failure.localizedDescription)
                             }
                             group.leave()
                         }
-                        group.leave()
                     case .failure(let failure):
                         print(failure.localizedDescription)
                     }
+                    group.leave()
                 }
             }
             group.notify(queue: .main) {

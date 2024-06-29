@@ -33,7 +33,7 @@ extension CharackterDetailInteractor: CharackterDetailInteractorProtocol {
     func getLocation() {
         guard let locaionURL = character.location?.url  else { return }
         
-        let cqueue = DispatchQueue(label: "character.location.fetch")
+        let cqueue = DispatchQueue(label: "character.location.fetch", attributes: .concurrent)
         
         cqueue.async { [weak self] in
             guard let self = self else { return }
@@ -53,7 +53,7 @@ extension CharackterDetailInteractor: CharackterDetailInteractorProtocol {
     
     func getCharacter() {
         
-        let cqueue = DispatchQueue(label: "character.detail.fetch")
+        let cqueue = DispatchQueue(label: "character.detail.fetch", attributes: .concurrent)
         var episodes: [Episode] = []
        
         cqueue.async { [weak self] in

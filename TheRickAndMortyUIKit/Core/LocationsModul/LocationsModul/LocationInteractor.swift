@@ -19,7 +19,7 @@ class LocationInteractor {
 //MARK: - protocol conformation
 extension LocationInteractor: LocationInteractorPrortocol {
     func fetchLocations() {
-        let cqueue = DispatchQueue(label: "loction.fetch")
+        let cqueue = DispatchQueue(label: "loction.fetch", attributes: .concurrent)
         
         cqueue.async { [weak self] in
             guard let self = self else { return }
